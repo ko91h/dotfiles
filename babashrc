@@ -86,17 +86,25 @@
         fi
     # }}}
     # Сокращения команд {{{2
-        alias gs='git status '
-        alias ga='git add '
-        alias gb='git branch '
-        alias gc='git commit'
-        alias gd='git diff'
-        alias go='git checkout '
-        alias gu='git reset HEAD -- '
-        alias gk='gitk --all&'
-        alias gx='gitx --all'
-        alias got='git '
-        alias gh='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+        # GIT {{{3
+            alias glc="git log -r --graph --pretty=format:'%Cred%h%Creset[%B] -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold)[%an]%Creset' --abbrev-commit --date=relative"
+            alias  glg="git log --color --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)[%an]%Creset %C(yellow)%d%Creset' --abbrev-commit"
+            alias glgd="git log --color --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%ci) %C(bold blue)[%an]%Creset %C(yellow)%d%Creset' --abbrev-commit"
+            alias gl="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+            alias gls="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short -n 10"
+            alias gg='git graph'
+            alias gln='glg -n10'
+            alias glnd='glgd -n10'
+            alias gs='git status '
+            alias ga='git add '
+            alias gb='git branch '
+            alias gc='git commit'
+            alias gd='git diff'
+            alias go='git checkout '
+            alias gu='git reset HEAD -- '
+            alias got='git '
+            alias gh='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+        # }}}
         alias ..="cd .."
         alias ...="cd ../.."
         alias ....="cd ../../.."
@@ -297,5 +305,6 @@
         function rtail { tail -f $1 | perl -pe 's/'$2'/\e[1;31;43m$&\e[0m/g'; }
         function ssmount { test -d /mnt/$1 || mkdir /mnt/$1; sshfs $1:/ /mnt/$1; }
         function mp3tags { find . -iname "*.mp3" -type f -print0 | xargs -0 mid3iconv -d -e CP1251 --remove-v1; }
+        function dumpaudio { mplayer -vc null -vo null -nocorrect-pts -ao pcm:waveheader ${1}; }
     # }}}
 # }}}
