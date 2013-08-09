@@ -34,7 +34,7 @@
         Bundle 'https://github.com/majutsushi/tagbar.git'
         "Bundle 'git://github.com/sjl/gundo.vim.git'
         Bundle 'git://github.com/edsono/vim-matchit.git'
-        Bundle 'git://github.com/vim-scripts/delimitMate.vim.git'
+        "Bundle 'git://github.com/vim-scripts/delimitMate.vim.git'
     " HTML/HAML
         Bundle 'git://github.com/othree/html5.vim.git'
         "Bundle 'git://github.com/gregsexton/MatchTag.git'
@@ -217,6 +217,9 @@
         let loaded_matchparen=1 " перестает прыгать на парную скобку, показывая где она. +100 к скорости
         "set noshowmatch    " Не показывать парные <> в HTML
         set showmatch       " показываем открывающие и закрывающие скобки
+
+" Filetypes
+    au BufNewFile,BufRead *.psgi set filetype=perl
 
 " Search
     set incsearch   " При поиске перескакивать на найденный текст в процессе набора строки
