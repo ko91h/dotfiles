@@ -1,5 +1,9 @@
 # /etc/bash/bashrc
 # vim:ft=sh:fdm=marker:fdl=0:fen:
+# Terminal {{{
+    stty -ixon
+    setterm -bfreq 0
+# }}}
 # Шелл {{{
     # Test for an interactive shell.  There is no need to set anything
     if [[ $- != *i* ]] ; then
