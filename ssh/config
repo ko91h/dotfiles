@@ -1,0 +1,7 @@
+host *
+    ForwardAgent yes
+    ControlMaster auto
+    ControlPersist yes
+    ControlPath ~/.ssh/master-%r@%h:%p
+
+

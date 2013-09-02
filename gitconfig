@@ -1,0 +1,38 @@
+[user]
+	name = Nikolay Meleshenko
+	email = n.meleshenko@corp.mail.ru
+[i18n]
+        commitEncoding = utf8
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[core]
+    editor = vim
+[pretty]
+    compact = "%Cred%h%Creset - %Cgreen%cr%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset"
+[alias]
+    ci = "commit"
+    st = "status -u"
+    br = "branch -a -vvv"
+    co = "checkout"
+    un = "reset HEAD --"
+    lg = "log --color --graph --pretty=compact --abbrev-commit"
+    hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+    ;graph = "log --graph --date-order -C -M --pretty=compact --all --date=short"
+    graph = "log --graph --date-order -C -M --pretty='%Cred%h%Creset - %Cgreen%cr%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --all --date=short"
+[mergetool "vimdiff"]
+	path = /home/n.meleshenko/local/bin/vimdiff
+[merge]
+	tool = vimdiff
