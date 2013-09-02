@@ -3,6 +3,9 @@
 # terminal {{{
     stty -ixon
     setterm -bfreq 0
+    if [ -f ~/.dotfiles/colours ]; then
+        . ~/.dotfiles/colours
+    fi
 # }}}
 # shell {{{
     # Test for an interactive shell.  There is no need to set anything
@@ -163,40 +166,93 @@
     # }}}
 # }}}
 # prompt {{{
-    # Set colorful PS1 only on colorful terminals.
-    # dircolors --print-database uses its own built-in database
-    # instead of using /etc/DIR_COLORS.  Try to use the external file
-    # first to take advantage of user additions.
-    source ~/.dotfiles/git-prompt.sh
-    use_color=false
-    safe_term=${TERM//[^[:alnum:]]/.}	# sanitize TERM
+    # Dreadatour
+    function parse_git_status {
+        # clear git variables
+        GIT_BRANCH=
+        GIT_DIRTY=
 
-    if [[ -f /etc/DIR_COLORS ]] ; then
-        grep -q "^TERM ${safe_term}" /etc/DIR_COLORS && use_color=true
-    elif type -p dircolors >/dev/null ; then
-        if dircolors --print-database | grep -q "^TERM ${safe_term}" ; then
-            use_color=true
-        fi
-    fi
+        # exit if no git found in system
+        local GIT_BIN=$(which git 2>/dev/null)
+        [[ -z $GIT_BIN ]] && return
 
-    if ${use_color} ; then
-        if [[ ${EUID} == 0 ]] ; then
-            PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
-        else
-            GIT_PS1_SHOWCOLORHINTS=1
-            PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W $(__git_ps1 "(%s)")\$\[\033[00m\] '
+        # check we are in git repo
+        local CUR_DIR=$PWD
+        while [ ! -d ${CUR_DIR}/.git ] && [ ! $CUR_DIR = "/" ]; do CUR_DIR=${CUR_DIR%/*}; done
+        [[ ! -d ${CUR_DIR}/.git ]] && return
+
+        # 'git repo for dotfiles' fix: show git status only in home dir and other git repos
+        [[ $CUR_DIR == $HOME ]] && [[ $PWD != $HOME ]] && return
+
+        # get git branch
+        GIT_BRANCH=$($GIT_BIN symbolic-ref HEAD 2>/dev/null)
+        [[ -z $GIT_BRANCH ]] && return
+        GIT_BRANCH=${GIT_BRANCH#refs/heads/}
+
+        # get git status
+        local GIT_STATUS=$($GIT_BIN status --porcelain 2>/dev/null)
+        [[ -n $GIT_STATUS ]] && GIT_DIRTY=true
+    }
+
+    function prompt_command {
+        local PS1_GIT=
+        local PWDNAME=$PWD
+
+        # beautify working directory name
+        if [ $HOME == $PWD ]; then
+            PWDNAME="~"
+        elif [ $HOME ==  ${PWD:0:${#HOME}} ]; then
+            PWDNAME="~${PWD:${#HOME}}"
         fi
 
-        alias ls='ls --color=auto'
-    else
-        if [[ ${EUID} == 0 ]] ; then
-            # show root@ when we don't have colors
-            PS1='\u@\h \W \$ '
-        else
-            PS1='\u@\h \w \$ '
+        # parse git status and get git variables
+        parse_git_status
+
+        # build b/w prompt for git
+        [[ ! -z $GIT_BRANCH ]] && PS1_GIT="git: ${GIT_BRANCH}"
+
+        PS1_ENV=
+        if [ ! -z $WORK_ENV ]; then
+            PS1_ENV="env: ${WORK_ENV} "
         fi
-    fi
-    unset use_color safe_term
+
+        # set b/w prompt
+        PS1="${USER}@${HOSTNAME}:${PWDNAME} (${PS1_ENV}${PS1_GIT})"
+
+        local color_user=
+        if $color_is_on; then
+            # set user color
+            case `id -u` in
+                0) color_user=$color_red ;;
+                *) color_user=$color_green ;;
+            esac
+
+            if [ ! -z $WORK_ENV ]; then
+                PS1_ENV="env: ${ENV_COLOR}${WORK_ENV}${color_off} "
+            fi
+
+            # build git status for prompt
+            if [ ! -z $GIT_BRANCH ]; then
+                if [ -z $GIT_DIRTY ]; then
+                    PS1_GIT="git: ${color_green}${GIT_BRANCH}${color_off}"
+                else
+                    PS1_GIT="git: ${color_red}${GIT_BRANCH}${color_off}"
+                fi
+            fi
+        fi
+
+        # calculate fillsize
+        local fillsize=$(($COLUMNS-$(printf "${PS1} " | wc -c | tr -d " ") - 9))
+
+        local FILL=''
+        while [ $fillsize -gt 0 ]; do FILL="${FILL}─"; fillsize=$(($fillsize-1)); done
+
+        # set new color prompt
+        PS1="${color_user}${USER}${color_off}@${color_yellow}${HOSTNAME}${color_off}:${color_white}${PWDNAME}${color_off} (${PS1_ENV}${PS1_GIT}) ${FILL} $(date +%H:%M:%S)\n➜ "
+
+        # echo -en "$(printf -v f "%$((${COLUMNS} - 9))s" ; printf "%s\n" "${f// /─}") $(date +%H:%M:%S)\r"
+    }
+    PROMPT_COMMAND=prompt_command
 # }}}
 # functions {{{
     # {{{ cd_func
@@ -314,4 +370,6 @@
         function dumpaudio { mplayer -vc null -vo null -nocorrect-pts -ao pcm:waveheader ${1}; }
     # }}}
 # }}}
-# Includes
+# Includes {{{
+
+# }}}
