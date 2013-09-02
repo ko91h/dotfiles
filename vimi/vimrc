@@ -8,7 +8,7 @@
     set nocompatible " be iMproved
     filetype off     " required!
 
-    set rtp+=~/.dotfiles/.vimi/.vim/bundle/vundle/
+    set rtp+=~/.dotfiles/vimi/vim/bundle/vundle/
     call vundle#rc()
 
     " let Vundle manage Vundle
@@ -22,7 +22,7 @@
         Bundle 'git://github.com/nanotech/jellybeans.vim.git'
         Bundle 'git://github.com/scrooloose/nerdtree.git'
         Bundle 'git://github.com/ervandew/supertab.git'
-        "Bundle 'git://github.com/vim-scripts/AutoComplPop.git'
+        Bundle 'git://github.com/vim-scripts/AutoComplPop.git'
         Bundle 'git://github.com/godlygeek/tabular.git'
         Bundle 'git://github.com/scrooloose/nerdcommenter.git'
         Bundle 'git://github.com/tpope/vim-surround.git'
@@ -30,7 +30,7 @@
         Bundle 'git://github.com/tpope/vim-fugitive.git'
         Bundle 'git://github.com/vim-scripts/bufexplorer.zip.git'
 
-        Bundle 'https://github.com/Shougo/neocomplcache.git'
+        "Bundle 'https://github.com/Shougo/neocomplcache.git'
         Bundle 'https://github.com/majutsushi/tagbar.git'
         "Bundle 'git://github.com/sjl/gundo.vim.git'
         Bundle 'git://github.com/edsono/vim-matchit.git'
@@ -40,6 +40,7 @@
         "Bundle 'git://github.com/gregsexton/MatchTag.git'
     " CSS/LESS
         Bundle 'git://github.com/hail2u/vim-css3-syntax.git'
+        Bundle 'git://github.com/groenewege/vim-less'
     " JavaScript
         Bundle 'git://github.com/pangloss/vim-javascript.git'
         Bundle 'git://github.com/itspriddle/vim-jquery.git'
@@ -47,6 +48,8 @@
         Bundle 'git://github.com/leshill/vim-json.git'
     " Perl
         Bundle 'git://github.com/vim-perl/vim-perl.git'
+    " Xslate
+        Bundle 'git://github.com/motemen/xslate-vim.git'
 
     filetype plugin indent on     " required!
     " Brief help
@@ -93,7 +96,7 @@
     set scrolloff=999       " focus mode like in Writer app http://www.iawriter.com/
     set showtabline=1       " Показывать вкладки табов только когда их больше одной
     "set list                " display unprintable characters
-    set nolist         
+    set nolist
     set nowrap              " Выключаем перенос строк (http://vimcasts.org/episodes/soft-wrapping-text/)
     set formatoptions-=o    " dont continue comments when pushing o/O
     set linebreak           " Перенос не разрывая слов
@@ -123,10 +126,10 @@
         set t_vb=
 
     " http://www.allaboutvim.ru/2012/03/blog-post.html
-        set isfname-=-
+        set isfname+=-
         set path=.,,,
-        set path+=$PATH_PRJ/**
-        set path+=$PATH_PRJ/../CPB/**
+        set path+=$PATH_BACK/**
+        set path+=$PATH_FRONT/**
 
 
     " Символ табуляции и конца строки
@@ -190,7 +193,7 @@
 
     " Проверка орфографии
         if version >= 700
-            set spell spelllang= 
+            set spell spelllang=
             set nospell " По умолчанию проверка орфографии выключена
             menu Spell.off :setlocal spell spelllang= <cr>
             menu Spell.Russian+English :setlocal spell spelllang=ru,en <cr>
@@ -217,9 +220,6 @@
         let loaded_matchparen=1 " перестает прыгать на парную скобку, показывая где она. +100 к скорости
         "set noshowmatch    " Не показывать парные <> в HTML
         set showmatch       " показываем открывающие и закрывающие скобки
-
-" Filetypes
-    au BufNewFile,BufRead *.psgi set filetype=perl
 
 " Search
     set incsearch   " При поиске перескакивать на найденный текст в процессе набора строки
@@ -482,6 +482,9 @@
 
 " Abbrs
     abbr ssql $CONFIG->{show_sql}=1;<esc>
+    abbr udd use Data::Dumper;<esc>
+    abbr lwd log_warn Dumper
+    abbr lw  log_warn
 
 " Environment
     set history=1000 " store lots of :cmdline history
@@ -518,6 +521,10 @@
         autocmd BufEnter * lcd %:p:h
 
 " File specific
+    au BufRead,BufNewFile *.html set filetype=xslate
+    au BufRead,BufNewFile *.psgi set filetype=perl
+    au BufRead,BufNewFile *.t    set filetype=perl
+    au BufRead,BufNewFile *.less set filetype=less
 
 " Цветовая схема
     syntax enable

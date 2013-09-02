@@ -1,10 +1,10 @@
 # /etc/bash/bashrc
 # vim:ft=sh:fdm=marker:fdl=0:fen:
-# Terminal {{{
+# terminal {{{
     stty -ixon
     setterm -bfreq 0
 # }}}
-# Шелл {{{
+# shell {{{
     # Test for an interactive shell.  There is no need to set anything
     if [[ $- != *i* ]] ; then
         # Shell is non-interactive.  Be done now!
@@ -15,7 +15,7 @@
     shopt -s histappend
     shopt -s cmdhist
     shopt -s cdspell
-    shopt -s cdable_vars 
+    shopt -s cdable_vars
     shopt -s checkhash
     shopt -s extglob
     shopt -s histreedit
@@ -34,7 +34,7 @@
         complete -c command exec type man info which
     fi
 # }}}
-# Переменные окружения {{{
+# environment {{{
     export LANG="ru_RU.UTF-8"
     export LC_TIME="C"
     export EDITOR="vim"
@@ -69,7 +69,7 @@
     export LESS_TERMCAP_ue=$'\E[0m'           # end underline
     export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # }}}
-# Aliases {{{1
+# aliases {{{1
     # Расцвечиваем вывод команд {{{2
         alias cal="LC_TIME='ru_RU.UTF-8' cal"
 
@@ -198,8 +198,8 @@
     fi
     unset use_color safe_term
 # }}}
-# Функции {{{
-    # {{{ cd_func 
+# functions {{{
+    # {{{ cd_func
     cd_func ()
     {
         local x2 the_new_dir adir index
@@ -256,7 +256,7 @@
     # }}}
     # {{{ extract
     extract () {
-            if [ -f $1 ] ; then 
+            if [ -f $1 ] ; then
                 case $1 in
                  *.tar.bz2)   tar xjf $1 ;;
                  *.tar.gz)    tar xzf $1 ;;
@@ -288,14 +288,14 @@
         esac
     }
     # }}}
-    # {{{ gvim server 
+    # {{{ gvim server
     gvimsrv () {
         VIM_SERVER=$(vim --serverlist | head -n 1)
         VIM="/usr/bin/gvim"
 
         if [ ! -n $VIM_SERVER ]
         then
-            $VIM --servername oko-vim 
+            $VIM --servername oko-vim
         fi
 
         $VIM --servername oko-vim --remote-tab-silent "$@"
@@ -314,3 +314,4 @@
         function dumpaudio { mplayer -vc null -vo null -nocorrect-pts -ao pcm:waveheader ${1}; }
     # }}}
 # }}}
+# Includes
