@@ -122,7 +122,7 @@
     set hidden " this allows to edit several files in the same time without having to save them
 
     " Не бибикать!
-        set visualbell " Use visual bell instead of beeping
+        set novisualbell " Use visual bell instead of beeping
         set t_vb=
 
     " http://www.allaboutvim.ru/2012/03/blog-post.html
