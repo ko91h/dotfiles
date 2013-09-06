@@ -71,6 +71,7 @@
     export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
     export LESS_TERMCAP_ue=$'\E[0m'           # end underline
     export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+    export LESS="-R"
 # }}}
 # aliases {{{1
     # Расцвечиваем вывод команд {{{2
@@ -112,47 +113,72 @@
             alias got='git '
             alias gh='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
         # }}}
+        # package management {{{
+            alias y='sudo aptitude'
+            alias yi='sudo aptitude install'
+            alias ys='sudo aptitude search'
+            alias yr='sudo aptitude purge'
+            alias ysy='sudo aptitude update'
+            alias ysu='sudo aptitude upgrade'
+        # }}}
+        # pip {{{
+            alias p.i='pip install'
+            alias p.s='pip search'
+        # }}}
+        # virtualenv {{{
+            alias v='workon'
+            alias v.deactivate='deactivate'
+            alias v.mk='mkvirtualenv --no-site-packages'
+            alias v.mk_withsitepackages='mkvirtualenv'
+            alias v.rm='rmvirtualenv'
+            alias v.switch='workon'
+            alias v.add2virtualenv='add2virtualenv'
+            alias v.cdsitepackages='cdsitepackages'
+            alias v.cd='cdvirtualenv'
+            alias v.lssitepackages='lssitepackages'
+        # }}}
+        # ls shortcuts {{{
+            alias lll="ll -ah"
+            alias lla="ll -a"
+            alias llh="ll -h"
+            alias lsa='ls -lur'         # atime
+            alias lsd='ls -ltr'         # mtime
+            alias lst='ls -lcr'         # ctime
+            alias lsz='ls -lSr'         # size
+            alias lse='ls -lXB'         # alphabetically
+            alias lsh='ls -Al'          # all
+            alias lsg='ls | grep -i'    # grep
+            alias lsm='ls -al | $PAGER' # page through
+            alias lsr='ls -lR'          # list recursively
+        # }}}
+        # android adb {{{
+            alias adbi="adb install"
+            alias adbis="adb install -s"
+            alias adbcp="adb push"
+            alias adbsh="adb shell"
+            alias adbrb="adb reboot"
+            alias rcd="daemon"
+        # }}}
+        # iptables {{{
+            alias ipt="iptables"
+            alias iptsave="iptables-save > ~/iptables_`date +%d.%m.%y`"
+            alias il="iptables -vnL"
+            alias iln="iptables -t nat -vnL"
+            alias ilm="iptables -t mangle -vnL"
+            alias ili="iptables -vnL INPUT"
+            alias ilo="iptables -vnL OUTPUT"
+            alias ilf="iptables -vnL FORWARD"
+        # }}}
+
         alias ..="cd .."
         alias ...="cd ../.."
         alias ....="cd ../../.."
         alias ntup="sudo /usr/bin/ntpdate time-a.nist.govs"
-        alias adbi="adb install"
-        alias adbis="adb install -s"
-        alias adbcp="adb push"
-        alias adbsh="adb shell"
-        alias adbrb="adb reboot"
-        alias rcd="daemon"
-        alias lll="ll -ah"
-        alias lla="ll -a"
-        alias llh="ll -h"
-        alias lsa='ls -lur'         # atime
-        alias lsd='ls -ltr'         # mtime
-        alias lst='ls -lcr'         # ctime
-        alias lsz='ls -lSr'         # size
-        alias lse='ls -lXB'         # alphabetically
-        alias lsh='ls -Al'          # all
-        alias lsg='ls | grep -i'    # grep
-        alias lsm='ls -al | $PAGER' # page through
-        alias lsr='ls -lR'          # list recursively
-        alias y='sudo aptitude'
-        alias yi='sudo aptitude install'
-        alias ys='sudo aptitude search'
-        alias yr='sudo aptitude purge'
-        alias ysy='sudo aptitude update'
-        alias ysu='sudo aptitude upgrade'
         alias m='mplayer'
-        alias ipt="iptables"
-        alias iptsave="iptables-save > ~/iptables_`date +%d.%m.%y`"
-        alias il="iptables -vnL"
-        alias iln="iptables -t nat -vnL"
-        alias ilm="iptables -t mangle -vnL"
-        alias ili="iptables -vnL INPUT"
-        alias ilo="iptables -vnL OUTPUT"
-        alias ilf="iptables -vnL FORWARD"
-        alias scr="screen -DR"
         alias G="grep"
         alias M="most"
         alias T="tail"
+        alias L="| less"
         alias Tf="tail -n 30 -f"
         alias cpp="rsync --progress"
         alias cx='chmod +x'

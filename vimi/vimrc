@@ -18,6 +18,9 @@
     " My Bundles here:
     " NOTE: comments after Bundle command are not allowed...
     "
+    " IDE
+        Bundle 'DfrankUtil'
+        Bundle 'vimprj'
     " Interface
         Bundle 'git://github.com/nanotech/jellybeans.vim.git'
         Bundle 'git://github.com/scrooloose/nerdtree.git'
@@ -515,7 +518,7 @@
         autocmd BufEnter * lcd %:p:h
 
 " File specific
-    au BufRead,BufNewFile *.html set filetype=xslate
+    "au BufRead,BufNewFile *.html set filetype=xslate
     au BufRead,BufNewFile *.psgi set filetype=perl
     au BufRead,BufNewFile *.t    set filetype=perl
     au BufRead,BufNewFile *.less set filetype=less

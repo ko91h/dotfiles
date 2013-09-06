@@ -4,4 +4,7 @@ host *
     ControlPersist yes
     ControlPath ~/.ssh/master-%r@%h:%p
 
+host base
+    HostName 74.63.212.132
+    user oko
 
