@@ -10,6 +10,7 @@ TMUX = tmux.conf
 SSH_DIR  = ssh
 SSH  = config
 GIT  = gitconfig
+BASH = bashrc
 
 vimi: echostart bundle-install
 	@echo "\nVimi successfully installed.\nRun Vim and write something awesome."
@@ -60,7 +61,8 @@ dotfiles: dotfiles_backup
 	)
 	@ln -s ${DOTFILES_DIR}/${SSH_DIR}/${SSH} ~/.${SSH_DIR}/${SSH}
 	@ln -s ${DOTFILES_DIR}/${TMUX} ~/.${TMUX}
-	@ln -s ${DOTFILES_DIR}/${GIT} ~/.${GIT}
+	@ln -s ${DOTFILES_DIR}/${GIT}  ~/.${GIT}
+	@ln -s ${DOTFILES_DIR}/${BASH} ~/.${BASH}
 
 dotfiles_backup: mkbackupdir prepare_dotfiles_backup
 	@echo "Backup your config files..."
@@ -80,6 +82,11 @@ dotfiles_backup: mkbackupdir prepare_dotfiles_backup
 		mv ~/.${GIT} ~/${BACKUP_PREFIX}/${GIT}; \
 		echo "making backup of your current ~/.${GIT} config to ~/${BACKUP_PREFIX}/${GIT}\n" \
 	)
+	@test ! -e ~/.${BASH} || \
+	(\
+		mv ~/.${BASH} ~/${BACKUP_PREFIX}/${BASH}; \
+		echo "making backup of your current ~/.${BASH} config to ~/${BACKUP_PREFIX}/${BASH}\n" \
+	)
 
 prepare_dotfiles_backup:
 	@test ! -e ~/${BACKUP_PREFIX}/${SSH_DIR} || \
@@ -88,6 +95,8 @@ prepare_dotfiles_backup:
 	rm -fr ~/${BACKUP_PREFIX}/${TMUX}
 	@test ! -e ~/${BACKUP_PREFIX}/${GIT} || \
 	rm -fr ~/${BACKUP_PREFIX}/${GIT}
+	@test ! -e ~/${BACKUP_PREFIX}/${BASH} || \
+	rm -fr ~/${BACKUP_PREFIX}/${BASH}
 
 mkbackupdir:
 	@test -d ~/${BACKUP_PREFIX} || mkdir ~/${BACKUP_PREFIX}

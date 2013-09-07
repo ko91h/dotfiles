@@ -20,6 +20,7 @@
     untracked = cyan
 [core]
     editor = vim
+	pager = less -F -X
 [pretty]
     compact = "%Cred%h%Creset - %Cgreen%cr%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset"
 [alias]
@@ -32,7 +33,7 @@
     hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
     ;graph = "log --graph --date-order -C -M --pretty=compact --all --date=short"
     graph = "log --graph --date-order -C -M --pretty='%Cred%h%Creset - %Cgreen%cr%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --all --date=short"
-[mergetool "vimdiff"]
-	path = /home/n.meleshenko/local/bin/vimdiff
 [merge]
 	tool = vimdiff
+[push]
+	default = simple

@@ -1,5 +1,7 @@
 # /etc/bash/bashrc
 # vim:ft=sh:fdm=marker:fdl=0:fen:
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 # terminal {{{
     stty -ixon
     setterm -bfreq 0
@@ -71,7 +73,7 @@
     export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
     export LESS_TERMCAP_ue=$'\E[0m'           # end underline
     export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
-    export LESS="-R"
+    export LESS="-R -F -X"
 # }}}
 # aliases {{{1
     # Расцвечиваем вывод команд {{{2
@@ -95,23 +97,21 @@
     # }}}
     # Сокращения команд {{{2
         # GIT {{{3
-            alias glc="git log -r --graph --pretty=format:'%Cred%h%Creset[%B] -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold)[%an]%Creset' --abbrev-commit --date=relative"
-            alias  glg="git log --color --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)[%an]%Creset %C(yellow)%d%Creset' --abbrev-commit"
-            alias glgd="git log --color --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%ci) %C(bold blue)[%an]%Creset %C(yellow)%d%Creset' --abbrev-commit"
-            alias gl="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
-            alias gls="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short -n 10"
-            alias gg='git graph'
-            alias gln='glg -n10'
-            alias glnd='glgd -n10'
+            PRETTY="%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)[%an]%Creset %C(yellow)%d%Creset"
+            alias glg="git log --color --graph --pretty=format:'$PRETTY' --abbrev-commit"
+            alias  gl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+            alias gls='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short -n 10'
+            alias  gg='git graph'
+            alias gln='glg -n20'
+            alias glnn='glg -n'
             alias gs='git status '
             alias ga='git add '
             alias gb='git branch '
-            alias gc='git commit'
+            alias gc='git commit '
             alias gd='git diff'
             alias go='git checkout '
             alias gu='git reset HEAD -- '
             alias got='git '
-            alias gh='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
         # }}}
         # package management {{{
             alias y='sudo aptitude'
@@ -170,6 +170,7 @@
             alias ilf="iptables -vnL FORWARD"
         # }}}
 
+        alias vim="vim -p"
         alias ..="cd .."
         alias ...="cd ../.."
         alias ....="cd ../../.."
@@ -189,6 +190,8 @@
         alias so='source ~/.bashrc'
         alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
         alias gr='grep -ir'
+        alias vibash="vim ~/.bashrc"
+        alias cddots="cd  ~/.dotfiles/"
     # }}}
 # }}}
 # prompt {{{
@@ -402,5 +405,20 @@
         export WORKON_HOME=$HOME/virt_envs
         source $VENV_WRAP
     fi
+# }}}
+# includes {{{
+    if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+    fi
 
+    # enable programmable completion features (you don't need to enable
+    # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+    # sources /etc/bash.bashrc).
+    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+        . /etc/bash_completion
+    fi
+
+    if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+    fi
 # }}}
