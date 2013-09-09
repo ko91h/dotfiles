@@ -192,6 +192,7 @@
         alias gr='grep -ir'
         alias vibash="vim ~/.bashrc"
         alias cddots="cd  ~/.dotfiles/"
+        alias tmux='tmux -2'
     # }}}
 # }}}
 # prompt {{{
