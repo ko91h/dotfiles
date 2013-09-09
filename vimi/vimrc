@@ -21,6 +21,7 @@
     " IDE
         Bundle 'DfrankUtil'
         Bundle 'vimprj'
+
     " Interface
         Bundle 'git://github.com/nanotech/jellybeans.vim.git'
         Bundle 'git://github.com/scrooloose/nerdtree.git'
@@ -51,6 +52,10 @@
         Bundle 'git://github.com/vim-perl/vim-perl.git'
     " Xslate
         Bundle 'git://github.com/motemen/xslate-vim.git'
+    " Django
+        Bundle 'django.vim'
+    " snippets
+        Bundle 'UltiSnips'
 
     filetype plugin indent on     " required!
     " Brief help
@@ -345,10 +350,10 @@
 
     " Disable <Arrow keys>
         " Позволяем передвигаться с помощью hjkl в Insert mode зажав <Ctrl>
-        imap <C-h> <C-o>h
-        imap <C-j> <C-o>j
-        imap <C-k> <C-o>k
-        imap <C-l> <C-o>l
+        "imap <C-h> <C-o>h
+        "imap <C-j> <C-o>j
+        "imap <C-k> <C-o>k
+        "imap <C-l> <C-o>l
 
     " Переключение по сплитам
         nmap <C-h> <C-W>h
@@ -389,8 +394,8 @@
         "
         " Especially useful for adding items in the middle of long lists/tuples in Python
         " while maintaining a sane text width.
-        nnoremap K <nop>
-        nnoremap K h/[^ ]<cr>"zd$jyyP^v$h"zpJk:s/\v +$//<cr>:noh<cr>j^
+        "nnoremap K <nop>
+        "nnoremap K h/[^ ]<cr>"zd$jyyP^v$h"zpJk:s/\v +$//<cr>:noh<cr>j^
 
     " Don't skip wrap lines
         " Еще раз и попонятнее:
@@ -499,8 +504,8 @@
     " Backup и swp файлы
         set nobackup    " Отключаем создание бэкапов
         set noswapfile  " Отключаем создание swap файлов
-        "set backupdir=~/.vimi/bac//,/tmp " Директория для backup файлов
-        "set directory=~/.vimi/swp//,/tmp " Директория для swp файлов
+        "set backupdir=~/.dotfiles/vimi/bak/,/tmp " Директория для backup файлов
+        "set directory=~/.dotfiles/vimi/swp/,/tmp " Директория для swp файлов
 
     " Загрузка предыдущей сессии
         set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -518,7 +523,9 @@
         autocmd BufEnter * lcd %:p:h
 
 " File specific
-    "au BufRead,BufNewFile *.html set filetype=xslate
+    au BufRead,BufNewFile *.html set filetype=xslate
+    au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
+    au BufRead,BufNewFile *.html if  search('{{') > 0  || search('{%') > 0 | set filetype=htmldjango | endif
     au BufRead,BufNewFile *.psgi set filetype=perl
     au BufRead,BufNewFile *.t    set filetype=perl
     au BufRead,BufNewFile *.less set filetype=less
@@ -543,7 +550,7 @@
         let NERDTreeShowBookmarks=1
         let NERDTreeChDirMode=2
         let NERDTreeQuitOnOpen=1
-        let NERDTreeShowHidden=1
+        let NERDTreeShowHidden=0
         let NERDTreeKeepTreeInNewTab=0
         let NERDTreeMinimalUI=1 " Disables display of the 'Bookmarks' label and 'Press ? for help' text.
         let NERDTreeDirArrows=1 " Tells the NERD tree to use arrows instead of + ~ chars when displaying directories.
@@ -557,7 +564,7 @@
         let g:acp_completeOption         = '.,w,b,k' " опции дополнения (completeopt)
         let g:acp_completeoptPreview     = 0         " показывать превью дополнения
         let g:acp_behaviorKeywordCommand = "\<C-n>"  " комманда для автодополнения
-        let g:acp_behaviorKeywordLength  = 4         " количество символов для начала дополнения
+        let g:acp_behaviorKeywordLength  = 3         " количество символов для начала дополнения
         let g:acp_behaviorKeywordIgnores = []        " не дополнять эти слова
     " }}}
 
@@ -574,4 +581,16 @@
         let g:NERDCustomDelimiters = {
             \ 'tt2html': { 'left': '#' }
         \ }
+    " }}}
+
+    " UltiSnips {{{
+        let g:UltiSnipsUsePythonVersion = 2
+        let g:UltiSnipsExpandTrigger="<c-j>"
+        let g:UltiSnipsListSnippets="<c-tab>"
+        let g:UltiSnipsJumpForwardTrigger="<c-j>"
+        let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+        let g:UltiSnipsEditSplit='vertical'
+        let g:UltiSnipsSnippetsDir=$HOME . '/.vim/bundle/UltiSnips/UltiSnips/'
+
+        map <leader>tu :UltiSnipsEdit<CR>
     " }}}
