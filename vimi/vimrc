@@ -505,7 +505,6 @@
         autocmd BufEnter * lcd %:p:h
 
 " File specific
-    au BufRead,BufNewFile *.html set filetype=xslate
     au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
     au BufRead,BufNewFile *.html if  search('{{') > 0  || search('{%') > 0 | set filetype=htmldjango | endif
     au BufRead,BufNewFile *.psgi set filetype=perl
