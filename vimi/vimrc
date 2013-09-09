@@ -54,7 +54,7 @@
         Bundle 'git://github.com/motemen/xslate-vim.git'
     " Django
         Bundle 'django.vim'
-    " snippets
+    " Snippets
         Bundle 'UltiSnips'
 
     filetype plugin indent on     " required!
@@ -252,8 +252,9 @@
     vmap <C-C> "+yi
     imap <C-V> <esc>"+gPi
 
-    map <leader>tt :NERDTreeToggle<CR>
+    map <leader>tt :NERDTreeToggle "'" . expand("%:p:h") ."'" <CR>
     map <leader>bb :BufExplorer<CR>
+    map <leader>tu :UltiSnipsEdit<CR>
 
     " ,m
         " в Normal mode тогглит поддержку мыши
@@ -344,6 +345,7 @@
     " Y янкает от курсора и до конца строки. На манер страндартных D и С.
         nnoremap Y y$
 
+<<<<<<< Updated upstream
     " Pasting with correct indention
         "nmap p p=`]
         "nmap P P=`[
@@ -355,6 +357,8 @@
         "imap <C-k> <C-o>k
         "imap <C-l> <C-o>l
 
+=======
+>>>>>>> Stashed changes
     " Переключение по сплитам
         nmap <C-h> <C-W>h
         nmap <C-j> <C-W>j
@@ -377,6 +381,7 @@
         nmap g* g*zz
         nmap g# g#zz
 
+<<<<<<< Updated upstream
     " K to split
         " Basically this splits the current line into two new ones at the cursor position,
         " then joins the second one with whatever comes next.
@@ -397,6 +402,8 @@
         "nnoremap K <nop>
         "nnoremap K h/[^ ]<cr>"zd$jyyP^v$h"zpJk:s/\v +$//<cr>:noh<cr>j^
 
+=======
+>>>>>>> Stashed changes
     " Don't skip wrap lines
         " Еще раз и попонятнее:
         " если строка n длиная и не влезла в окно — она перенесется на
@@ -423,8 +430,20 @@
         " camelCase => camel_case
         vnoremap <silent> <Leader>c :s/\v\C(([a-z]+)([A-Z]))/\2_\l\3/g<CR>
 
-    " Fix Trailing White Space
-        map <leader>ts :%s/\s\+$//e<CR>
+    " ,ts fix trailing spaces
+        function! Preserve(command)
+            " Preparation: save last search, and cursor position.
+            let _s=@/
+            let l = line(".")
+            let c = col(".")
+            " Do the business:
+            execute a:command
+            %s/\s\+$//e
+            " Clean up: restore previous search history, and cursor position
+            let @/=_s
+            call cursor(l, c)
+        endfunction
+        map <silent> <leader>ts :call Preserve("%s/\\s\\+$//e")<CR>
 
     " ,bl show buffers
         nmap <Leader>bl :ls<cr>:b
@@ -584,13 +603,16 @@
     " }}}
 
     " UltiSnips {{{
-        let g:UltiSnipsUsePythonVersion = 2
-        let g:UltiSnipsExpandTrigger="<c-j>"
-        let g:UltiSnipsListSnippets="<c-tab>"
-        let g:UltiSnipsJumpForwardTrigger="<c-j>"
-        let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-        let g:UltiSnipsEditSplit='vertical'
-        let g:UltiSnipsSnippetsDir=$HOME . '/.vim/bundle/UltiSnips/UltiSnips/'
+        let g:UltiSnipsUsePythonVersion    = 2
+        let g:UltiSnipsExpandTrigger       = '<c-j>'
+        let g:UltiSnipsListSnippets        = '<c-tab>'
+        let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
+        let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+        let g:UltiSnipsSnippetsDir         = $HOME . '/.vim/mysnips/'
+        let g:UltiSnipsEditSplit           = 'vertical'
 
-        map <leader>tu :UltiSnipsEdit<CR>
+    " }}}
+    " Supertab {{{
+        let g:SuperTabMappingForward  = '<c-j>'
+        let g:SuperTabMappingBackward = '<c-k>'
     " }}}
