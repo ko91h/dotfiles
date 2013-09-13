@@ -102,7 +102,7 @@ mkbackupdir:
 	@test -d ~/${BACKUP_PREFIX} || mkdir ~/${BACKUP_PREFIX}
 	@echo "Making backup dir..."
 
-ubuntu: rename_default_dirs
+ubuntu: rename_default_dirs make_look
 	@echo "Your default home dirs was renamed"
 
 rename_default_dirs:
@@ -117,3 +117,10 @@ rename_default_dirs:
 	@cp ~/.gtk-bookmarks ~/${BACKUP_PREFIX}/gtk-bookmarks
 	@cp ~/.dotfiles/ubuntu/gtk-bookmarks ~/.gtk-bookmarks
 
+make_look:
+	@test -d ~/.themes || mkdir ~/.themes
+	@ln -s ~/.dotfiles/ubuntu-look/Numix ~/.themes/Numix
+	@test -d ~/.icons  || mkdir ~/.icons
+	@ln -s ~/.dotfiles/ubuntu-look/Humanity-Colors-Dark-Blue ~/.icons/Humanity-Colors-Dark-Blue
+	@sudo cp ~/.dotfiles/ubuntu-look/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
+	@sh ~/.dotfiles/ubuntu-look/gsettings
