@@ -101,3 +101,19 @@ prepare_dotfiles_backup:
 mkbackupdir:
 	@test -d ~/${BACKUP_PREFIX} || mkdir ~/${BACKUP_PREFIX}
 	@echo "Making backup dir..."
+
+ubuntu: rename_default_dirs
+	@echo "Your default home dirs was renamed"
+
+rename_default_dirs:
+	@mv ~/Видео ~/video
+	@mv ~/Документы ~/docs
+	@mv ~/Загрузки ~/downloads
+	@mv ~/Изображения ~/images
+	@mv ~/Музыка ~/music
+	@mv ~/Общедоступные ~/share
+	@mv ~/Шаблоны ~/templates
+	@cp ~/.dotfiles/ubuntu/config/user-dirs.dirs ~/.config/user-dirs.dirs
+	@cp ~/.gtk-bookmarks ~/${BACKUP_PREFIX}/gtk-bookmarks
+	@cp ~/.dotfiles/ubuntu/gtk-bookmarks ~/.gtk-bookmarks
+
