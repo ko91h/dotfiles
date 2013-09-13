@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper>
+    <name>Blueprint.jpg</name>
+    <filename>/usr/share/backgrounds/Blueprint.jpg</filename>
+    <shade_type>solid</shade_type>
+  </wallpaper>
+</wallpapers>
