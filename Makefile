@@ -119,8 +119,8 @@ rename_default_dirs:
 
 make_look:
 	@test -d ~/.themes || mkdir ~/.themes
-	@ln -s ~/.dotfiles/ubuntu-look/Numix ~/.themes/Numix
+	@ln -fs ~/.dotfiles/ubuntu-look/Numix ~/.themes/Numix
 	@test -d ~/.icons  || mkdir ~/.icons
-	@ln -s ~/.dotfiles/ubuntu-look/Humanity-Colors-Dark-Blue ~/.icons/Humanity-Colors-Dark-Blue
+	@ln -fs ~/.dotfiles/ubuntu-look/Humanity-Colors-Dark-Blue ~/.icons/Humanity-Colors-Dark-Blue
 	@sudo cp ~/.dotfiles/ubuntu-look/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
 	@sh ~/.dotfiles/ubuntu-look/gsettings
