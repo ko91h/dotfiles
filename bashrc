@@ -45,7 +45,7 @@
     export EDITOR="vim"
     #export PAGER="vimpager"
     export PAGER="less"
-    export PATH=/opt/android-sdk-linux/platform-tools:$HOME/bin:$PATH:/usr/bin/core_perl
+    export PATH=/opt/android-sdk-linux/platform-tools:$HOME/bin:$PATH:/usr/bin/core_perl:$HOME/.dotfiles/bin
     export CDPATH=~:.:./export/home/vm/:/deby:/mnt:/root:/home/oko:/home/oko/mnt
 
     export HISTCONTROL="erasedups"
