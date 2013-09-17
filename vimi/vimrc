@@ -183,10 +183,10 @@
         "set statusline+=%h "флажок хелпа
         set statusline+=%m "флажок модификации файла
         set statusline+=%r "флажок только на чтение
-        set statusline+=%Y "тип файла
+        set statusline+=[%Y] "тип файла
         ""set statusline+=\ %{fugitive#statusline()} "git status
-        set statusline+=%c, "колонка курсора
-        set statusline+=%l/%L "линия курсора / всего линий
+        set statusline+=[%c, "колонка курсора
+        set statusline+=%l/%L] "линия курсора / всего линий
         set statusline+=\ %P "просмотрено в процентах
     " }}}
 
