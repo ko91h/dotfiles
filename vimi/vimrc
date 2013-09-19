@@ -38,6 +38,7 @@
 
         Bundle 'git://github.com/edsono/vim-matchit.git'
         Bundle 'kien/ctrlp.vim.git'
+        Bundle 'git://github.com/bling/vim-airline'
     " HTML/HAML
         Bundle 'git://github.com/othree/html5.vim.git'
     " CSS/LESS
