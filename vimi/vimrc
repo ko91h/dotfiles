@@ -173,22 +173,6 @@
 
     " Статусная строка {{{
         set laststatus=2
-        set statusline=[%{strftime(\"%H:%M:%S\")}] "время
-        set statusline+=[%{FileSize()}]
-        set statusline+=[%F] "имя файла
-        set statusline+=%= "разделитель на "лево" и "право"
-        "set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=[%{&foldmethod}]
-        set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "кодировка файла
-        set statusline+=%{&ff}] "формат файла
-        "set statusline+=%h "флажок хелпа
-        set statusline+=%m "флажок модификации файла
-        set statusline+=%r "флажок только на чтение
-        set statusline+=[%Y] "тип файла
-        ""set statusline+=\ %{fugitive#statusline()} "git status
-        set statusline+=[%c, "колонка курсора
-        set statusline+=%l/%L] "линия курсора / всего линий
-        set statusline+=\ %P "просмотрено в процентах
     " }}}
 
     " Создаем меню с кодировками
@@ -578,4 +562,12 @@
     " Supertab {{{
         let g:SuperTabMappingForward  = '<c-j>'
         let g:SuperTabMappingBackward = '<c-k>'
+    " }}}
+    " Airline {{{
+        let g:airline_theme='jellybeans'
+        let g:airline_powerline_fonts = 1
+        let g:airline_section_b='%{getcwd()}'
+        let g:airline#extensions#ctrlp#color_template = 'normal'
+        let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+        let g:airline#extensions#virtualenv#enabled = 1
     " }}}
