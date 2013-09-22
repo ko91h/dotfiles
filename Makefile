@@ -115,12 +115,19 @@ rename_default_dirs:
 	@mv ~/Шаблоны ~/templates
 	@cp ~/.dotfiles/ubuntu/config/user-dirs.dirs ~/.config/user-dirs.dirs
 	@cp ~/.gtk-bookmarks ~/${BACKUP_PREFIX}/gtk-bookmarks
-	@cp ~/.dotfiles/ubuntu/gtk-bookmarks ~/.gtk-bookmarks
+	@cp ${DOTFILES_DIR}/ubuntu/gtk-bookmarks ~/.gtk-bookmarks
 
 make_look:
 	@test -d ~/.themes || mkdir ~/.themes
-	@ln -fs ~/.dotfiles/ubuntu-look/Numix ~/.themes/Numix
+	@ln -fs ${DOTFILES_DIR}/ubuntu-look/Numix ~/.themes/Numix
 	@test -d ~/.icons  || mkdir ~/.icons
-	@ln -fs ~/.dotfiles/ubuntu-look/Humanity-Colors-Dark-Blue ~/.icons/Humanity-Colors-Dark-Blue
-	@sudo cp ~/.dotfiles/ubuntu-look/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
-	@sh ~/.dotfiles/ubuntu-look/gsettings
+	@ln -fs ${DOTFILES_DIR}/ubuntu-look/Humanity-Colors-Dark-Blue ~/.icons/Humanity-Colors-Dark-Blue
+	@sudo cp ${DOTFILES_DIR}/ubuntu-look/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
+	@sh ${DOTFILES_DIR}/ubuntu-look/gsettings
+
+fonts:
+	@echo "Set up patched fonts..."
+	@test -d ~/.fonts || mkdir ~/.fonts
+	@cp ${DOTFILES_DIR}/ubuntu/fonts/* ~/.fonts/
+	@fc-cache -vf ~/.fonts/
+
