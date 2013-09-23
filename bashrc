@@ -190,6 +190,7 @@
         alias so='source ~/.bashrc'
         alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
         alias gr='grep -ir'
+        alias grl='grep -irl'
         alias vibash="vim ~/.bashrc"
         alias cddots="cd  ~/.dotfiles/"
         alias tmux='tmux -2'
@@ -398,6 +399,7 @@
         function ssmount { test -d ~/mnt/$1 || mkdir -p ~/mnt/$1; sshfs $1:/ ~/mnt/$1; }
         function mp3tags { find . -iname "*.mp3" -type f -print0 | xargs -0 mid3iconv -d -e CP1251 --remove-v1; }
         function dumpaudio { mplayer -vc null -vo null -nocorrect-pts -ao pcm:waveheader ${1}; }
+        function grvim { vim $(grep -ir -l $1 $2); }
     # }}}
 # }}}
 # virtualenv {{{
