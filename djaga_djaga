@@ -1,0 +1,44 @@
+#!/bin/bash
+
+INSTALL="sudo apt-get -qqy install "
+
+DAV_DIR="$HOME/.davfs2"
+DAV_CREDS="${DAV_DIR}/secrets"
+DAV_MOUNT="$HOME/yadrive"
+DAV_HOST="https://webdav.yandex.ru"
+DAV_USER="ko91h7@yandex.ru"
+
+SUDO_NOPASS="$USER ALL=(ALL) NOPASSWD: ALL"
+sudo grep $USER /etc/sudoers &>/dev/null || echo ${SUDO_NOPASS} | sudo tee -a /etc/sudoers >/dev/null
+sudo sed -i -e 's/enabled=1/enabled=0/' /etc/default/apport
+
+echo "Updating apt sources..."
+sudo apt-get -qq update
+echo "Upgrading packages..."
+sudo apt-get -qqy upgrade
+
+$INSTALL vim
+$INSTALL davfs2
+sudo chmod 4755 /usr/sbin/mount.davfs
+sudo usermod -aG davfs2 $USER
+sudo usermod -aG fuse   $USER
+sudo usermod -aG sudo   $USER
+
+test -d $DAV_DIR   || mkdir $DAV_DIR
+test -d $DAV_MOUNT || mkdir $DAV_MOUNT
+test -f $DAV_CREDS || touch $DAV_CREDS
+chmod 600 $DAV_CREDS
+grep $DAV_MOUNT $DAV_CREDS &>/dev/null || (echo -e "$DAV_MOUNT\t$DAV_USER\t" >> $DAV_CREDS; vim $DAV_CREDS < `tty` > `tty`)
+grep $DAV_HOST /etc/fstab &>/dev/null || echo -e "$DAV_HOST\t$DAV_MOUNT\tdavfs\tuser,rw,noauto\t0\t0" | sudo tee -a /etc/fstab >/dev/null
+mount $DAV_MOUNT
+
+#$INSTALL mc
+#$INSTALL aptitude
+#$INSTALL sshfs
+#$INSTALL cifs-utils
+#$INSTALL openssh-server
+#$INSTALL htop
+#$INSTALL gparted
+#$INSTALL ncdu
+#$INSTALL python-mutagen
+#$INSTALL exuberant-ctags
