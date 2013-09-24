@@ -52,7 +52,7 @@
     export HISTFILESIZE=500000
     export HISTSIZE=100000
     export HISTFILE=~/.bash_history
-    export HISTIGNORE="[   ]*:[bf]g:&:ls:pwd:exit:clear:ll:mc"
+    export HISTIGNORE="[   ]*:[bf]g:&:ls:pwd:exit:clear:ll:mc:rests:tel"
     export HISTTIMEFORMAT='%h.%d %H:%M '
 
     export GREP_OPTIONS='--color=auto'
