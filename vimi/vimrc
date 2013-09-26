@@ -57,6 +57,8 @@
         Bundle 'django.vim'
     " Snippets
         Bundle 'UltiSnips'
+    " Nginx
+        Bundle 'nginx.vim'
 
     filetype plugin indent on     " required!
     " Brief help
