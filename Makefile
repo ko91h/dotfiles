@@ -22,8 +22,8 @@ bundle-install: vimi_symlinks vundle
 	-vim +BundleInstall +quitall
 
 vimi_symlinks: vimi_backup
-	@ln -s ${VIMI_DIR}/${VIMRC} ~/.${VIMRC} && \
-	ln -s ${VIMI_DIR}/${VIM_DIR} ~/.${VIM_DIR} && \
+	@ln -fs ${VIMI_DIR}/${VIMRC} ~/.${VIMRC} && \
+	ln -fs ${VIMI_DIR}/${VIM_DIR} ~/.${VIM_DIR} && \
 	echo "Create symlinks:\n~/.${VIMRC} -> ${VIMI_DIR}/${VIMRC}\n~/.${VIM_DIR} -> ${VIMI_DIR}/${VIM_DIR}\n"
 
 vimi_backup: mkbackupdir prepare_vimi_backup
