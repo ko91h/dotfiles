@@ -1,0 +1,50 @@
+gsettings set org.gnome.desktop.interface       menus-have-icons        false
+gsettings set org.gnome.desktop.interface       font-name               'Ubuntu 11'
+gsettings set org.gnome.desktop.interface       document-font-name      'Sans 11'
+gsettings set org.gnome.desktop.interface       toolkit-accessibility   false
+gsettings set org.gnome.desktop.interface       cursor-theme            'DMZ-White'
+gsettings set org.gnome.desktop.interface       icon-theme              'my_elementary'
+gsettings set org.gnome.desktop.interface       buttons-have-icons      false
+gsettings set org.gnome.desktop.interface       monospace-font-name     'Ubuntu Mono 13'
+gsettings set org.gnome.desktop.interface       can-change-accels       false
+gsettings set org.gnome.desktop.interface       automatic-mnemonics     true
+gsettings set org.gnome.desktop.interface       cursor-blink            true
+gsettings set org.gnome.desktop.interface       gtk-color-scheme        'selected_bg_color:#729fcf;selected_fg_color:#f9f9f9;'
+gsettings set org.gnome.desktop.interface       gtk-theme               'Numix'
+
+gsettings set org.gnome.desktop.wm.keybindings  move-to-side-n          "['<Control><Alt>KP_Up']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-corner-ne       "['<Control><Alt>KP_Prior']"
+gsettings set org.gnome.desktop.wm.keybindings  toggle-maximized        "['<Super>Up']"
+gsettings set org.gnome.desktop.wm.keybindings  switch-windows-backward "['disabled']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-side-s          "['<Control><Alt>KP_Down']"
+gsettings set org.gnome.desktop.wm.keybindings  close                   "['<Alt><Super>semicolon','<Alt>F4']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-side-w          "['<Control><Alt>KP_Left']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-corner-se       "['<Control><Alt>KP_Next']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-corner-nw       "['<Control><Alt>KP_Home']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-side-e          "['<Control><Alt>KP_Right']"
+gsettings set org.gnome.desktop.wm.keybindings  move-to-corner-sw       "['<Control><Alt>KP_End']"
+
+gsettings set org.gnome.desktop.wm.preferences  auto-raise              false
+gsettings set org.gnome.desktop.wm.preferences  auto-raise-delay        500
+gsettings set org.gnome.desktop.wm.preferences  focus-mode              'click'
+gsettings set org.gnome.desktop.wm.preferences  theme                   'Numix'
+gsettings set org.gnome.desktop.wm.preferences  titlebar-font           'Ubuntu Bold 11'
+
+gsettings set org.gnome.desktop.background      picture-uri             'file:///usr/share/backgrounds/Blueprint.jpg'
+gsettings set org.gnome.desktop.background      show-desktop-icons      false
+gsettings set org.gnome.desktop.background      color-shading-type      'solid'
+gsettings set org.gnome.desktop.background      primary-color           '#000000'
+gsettings set org.gnome.desktop.background      picture-options         'zoom'
+gsettings set org.gnome.desktop.background      secondary-color         '#000000'
+
+gsettings set com.canonical.unity-greeter       background              '/usr/share/backgrounds/Blueprint.jpg'
+
+gsettings org.compiz.integrated command-1         'firefox'
+gsettings org.compiz.integrated command-2         'nautilus'
+gsettings org.compiz.integrated command-3         'google-chrome'
+gsettings org.compiz.integrated command-4         'gmrun'
+gsettings org.compiz.integrated run-command-1     "['<Super>f']"
+gsettings org.compiz.integrated run-command-2     "['<Super>e']"
+gsettings org.compiz.integrated run-command-3     "['<Super>g']"
+gsettings org.compiz.integrated run-command-4     "['<Super>r']"
+gsettings org.compiz.integrated show-hud          "['Disabled']"

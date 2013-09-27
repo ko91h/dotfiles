@@ -123,6 +123,7 @@ make_look:
 	@test -d ~/.icons  || mkdir ~/.icons
 	@tar -xf ${DOTFILES_DIR}/ubuntu/elementary-icons.tgz ~/.icons/
 	@sudo cp ${DOTFILES_DIR}/ubuntu/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
+	@sh ${DOTFILES_DIR}/ubuntu/gsettings
 
 fonts:
 	@echo "Set up patched fonts..."
