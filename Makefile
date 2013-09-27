@@ -119,11 +119,10 @@ rename_default_dirs:
 
 make_look:
 	@test -d ~/.themes || mkdir ~/.themes
-	@ln -fs ${DOTFILES_DIR}/ubuntu-look/Numix ~/.themes/Numix
+	@tar -xf ${DOTFILES_DIR}/ubuntu/numix-theme.tgz ~/.themes/
 	@test -d ~/.icons  || mkdir ~/.icons
-	@ln -fs ${DOTFILES_DIR}/ubuntu-look/Humanity-Colors-Dark-Blue ~/.icons/Humanity-Colors-Dark-Blue
-	@sudo cp ${DOTFILES_DIR}/ubuntu-look/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
-	@sh ${DOTFILES_DIR}/ubuntu-look/gsettings
+	@tar -xf ${DOTFILES_DIR}/ubuntu/elementary-icons.tgz ~/.icons/
+	@sudo cp ${DOTFILES_DIR}/ubuntu/Blueprint.jpg /usr/share/backgrounds/Blueprint.jpg
 
 fonts:
 	@echo "Set up patched fonts..."
