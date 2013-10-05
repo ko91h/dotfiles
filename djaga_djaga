@@ -13,7 +13,7 @@ sudo grep $USER /etc/sudoers &>/dev/null || echo ${SUDO_NOPASS} | sudo tee -a /e
 sudo sed -i -e 's/enabled=1/enabled=0/' /etc/default/apport
 
 echo "Updating apt sources..."
-sudo apt-get -qq update
+sudo apt-get -qqy update
 echo "Upgrading packages..."
 sudo apt-get -qqy upgrade
 
