@@ -23,6 +23,7 @@
         Bundle 'vimprj'
 
     " Interface
+        Bundle 'https://github.com/altercation/vim-colors-solarized'
         Bundle 'git://github.com/nanotech/jellybeans.vim.git'
         Bundle 'git://github.com/scrooloose/nerdtree.git'
 
@@ -508,20 +509,22 @@
         autocmd BufEnter * lcd %:p:h
 
 " File specific
-    au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
-    au BufRead,BufNewFile *.html if  search('{{') > 0  || search('{%') > 0 | set filetype=htmldjango | endif
+    "au BufRead,BufNewFile *.html if  search('^: ') > 0 || search('<:') > 0 | set filetype=xslate | endif
+    "au BufRead,BufNewFile *.html if  search('{{') > 0  || search('{%') > 0 | set filetype=htmldjango | endif
     au BufRead,BufNewFile *.psgi set filetype=perl
     au BufRead,BufNewFile *.t    set filetype=perl
     au BufRead,BufNewFile *.less set filetype=less
 
 " Цветовая схема
     syntax enable
-    colorscheme jellybeans
-    hi TabLineFill      ctermbg=237
-    hi TabLineSel       ctermbg=230 ctermfg=144
-    hi TabLine          ctermbg=236 ctermfg=144
-    hi IndentGuidesEven ctermbg=darkgrey
-    hi IndentGuidesOdd  ctermbg=black
+    set background=dark
+    let g:solarized_termcolors=256
+    colorscheme solarized
+    "hi TabLineFill      ctermbg=237
+    "hi TabLineSel       ctermbg=230 ctermfg=144
+    "hi TabLine          ctermbg=236 ctermfg=144
+    "hi IndentGuidesEven ctermbg=darkgrey
+    "hi IndentGuidesOdd  ctermbg=black
 
 " Плагины
         try
